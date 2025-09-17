@@ -1,11 +1,91 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import StatsCard from "@/components/ui/stats-card";
+import MarksTable from "@/components/dashboard/MarksTable";
+import DocumentLinks from "@/components/dashboard/DocumentLinks";
+import ChatInterface from "@/components/chatbot/ChatInterface";
+import { GraduationCap, Users, TrendingUp, Calendar } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      {/* Background Effects */}
+      <div className="fixed inset-0 bg-gradient-to-br from-primary/5 via-background to-background pointer-events-none" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_30%_40%,hsl(var(--primary))_0%,transparent_50%)] opacity-10 pointer-events-none" />
+      
+      <div className="relative z-10">
+        <div className="container mx-auto px-4 py-8 max-w-7xl">
+          <DashboardHeader />
+          
+          {/* Stats Overview */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <StatsCard
+              title="Total Students"
+              value="127"
+              description="Enrolled in session"
+              icon={Users}
+              trend={{ value: "8.2%", isPositive: true }}
+            />
+            <StatsCard
+              title="Average Marks"
+              value="85.4"
+              description="Overall performance"
+              icon={GraduationCap}
+              trend={{ value: "4.1%", isPositive: true }}
+            />
+            <StatsCard
+              title="Attendance Rate"
+              value="93.2%"
+              description="Class attendance"
+              icon={Calendar}
+              trend={{ value: "2.3%", isPositive: true }}
+            />
+            <StatsCard
+              title="Performance Trend"
+              value="↗ Improving"
+              description="Compared to last session"
+              icon={TrendingUp}
+              trend={{ value: "12.5%", isPositive: true }}
+            />
+          </div>
+
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            {/* Marks Table - Takes 2 columns on large screens */}
+            <div className="lg:col-span-2">
+              <MarksTable />
+            </div>
+            
+            {/* Sidebar Content */}
+            <div className="space-y-8">
+              <DocumentLinks />
+            </div>
+          </div>
+
+          {/* Chatbot Interface */}
+          <div className="max-w-4xl mx-auto">
+            <ChatInterface />
+          </div>
+
+          {/* Integration Status */}
+          <div className="mt-8 p-6 bg-card border border-border rounded-xl shadow-card">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-full bg-success/10">
+                  <div className="w-3 h-3 bg-success rounded-full animate-pulse" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-card-foreground">Real-time Data Connection</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Connected to Google Sheets • Last sync: 2 minutes ago
+                  </p>
+                </div>
+              </div>
+              <div className="text-xs text-muted-foreground bg-muted px-3 py-1 rounded-full">
+                Auto-refresh enabled
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
