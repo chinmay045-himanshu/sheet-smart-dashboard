@@ -3,9 +3,26 @@ import StatsCard from "@/components/ui/stats-card";
 import MarksTable from "@/components/dashboard/MarksTable";
 import DocumentLinks from "@/components/dashboard/DocumentLinks";
 import ChatInterface from "@/components/chatbot/ChatInterface";
+import { useGoogleSheets } from "@/hooks/useGoogleSheets";
 import { GraduationCap, Users, TrendingUp, Calendar } from "lucide-react";
 
 const Index = () => {
+  const { students, loading } = useGoogleSheets();
+  
+  // Calculate real-time stats
+  const totalStudents = students.length;
+  const averageMarks = students.length > 0 
+    ? students.reduce((acc, student) => {
+        const subjects = Object.values(student.subjects);
+        const studentAvg = subjects.reduce((sum, subject) => sum + subject.percentage, 0) / subjects.length;
+        return acc + studentAvg;
+      }, 0) / students.length 
+    : 0;
+  
+  const averageAttendance = students.length > 0
+    ? students.reduce((acc, student) => acc + student.attendance, 0) / students.length
+    : 0;
+
   return (
     <div className="min-h-screen bg-background">
       {/* Background Effects */}
@@ -20,31 +37,31 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <StatsCard
               title="Total Students"
-              value="127"
-              description="Enrolled in session"
+              value={loading ? "..." : totalStudents.toString()}
+              description="Government Polytechnic Arvi"
               icon={Users}
-              trend={{ value: "8.2%", isPositive: true }}
+              trend={{ value: "CO-3-K Branch", isPositive: true }}
             />
             <StatsCard
               title="Average Marks"
-              value="85.4"
+              value={loading ? "..." : averageMarks.toFixed(1)}
               description="Overall performance"
               icon={GraduationCap}
-              trend={{ value: "4.1%", isPositive: true }}
+              trend={{ value: "Real-time sync", isPositive: true }}
             />
             <StatsCard
               title="Attendance Rate"
-              value="93.2%"
+              value={loading ? "..." : `${averageAttendance.toFixed(1)}%`}
               description="Class attendance"
               icon={Calendar}
-              trend={{ value: "2.3%", isPositive: true }}
+              trend={{ value: "Live updates", isPositive: true }}
             />
             <StatsCard
-              title="Performance Trend"
-              value="↗ Improving"
-              description="Compared to last session"
+              title="Google Sheets"
+              value="Connected"
+              description="AY 2025-26 Data"
               icon={TrendingUp}
-              trend={{ value: "12.5%", isPositive: true }}
+              trend={{ value: "Auto-sync", isPositive: true }}
             />
           </div>
 
@@ -76,12 +93,12 @@ const Index = () => {
                 <div>
                   <h3 className="font-semibold text-card-foreground">Real-time Data Connection</h3>
                   <p className="text-sm text-muted-foreground">
-                    Connected to Google Sheets • Last sync: 2 minutes ago
+                    Connected to Google Sheets • Auto-sync every 30 seconds
                   </p>
                 </div>
               </div>
               <div className="text-xs text-muted-foreground bg-muted px-3 py-1 rounded-full">
-                Auto-refresh enabled
+                Academic Year 2025-26
               </div>
             </div>
           </div>

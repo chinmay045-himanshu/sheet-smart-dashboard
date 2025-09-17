@@ -14,10 +14,11 @@ interface ChatMessage {
 }
 
 const mockResponses = {
-  attendance: "Based on the latest data from the attendance system, here are the attendance rates:\n• Himanshu Bokey: 95%\n• Monal Torne: 88%\n• Dhoke Student: 97%",
-  marks: "Here are the latest sessional marks:\n\n**Mathematics:**\n• Himanshu: 85/100 (Grade A)\n• Monal: 76/100 (Grade B+)\n• Dhoke: 94/100 (Grade A+)\n\n**Physics:**\n• Himanshu: 78/100 (Grade B+)\n• Monal: 82/100 (Grade A-)\n• Dhoke: 89/100 (Grade A)",
-  syllabus: "I found the course syllabus document. It was last updated 2 hours ago and contains the complete curriculum for Computer Science. Would you like me to open it for you?",
-  default: "I can help you with information about:\n• 📊 Student marks and grades\n• 📅 Attendance records\n• 📁 Course documents and syllabus\n• 📈 Performance analytics\n\nWhat would you like to know?"
+  attendance: "Based on the latest data from Government Polytechnic Arvi (CO-3-K), here are some attendance rates:\n• BOKEY HIMANSHU SURENDRA: 95%\n• MRUNAL PRAVIN JAGTAP: 88%\n• UKANDE JAYANT MANGLESH: 97%\n\nReal-time data is synced from Google Sheets every 30 seconds.",
+  marks: "Here are the latest sessional marks from Government Polytechnic Arvi:\n\n**Mathematics:**\n• BOKEY HIMANSHU: 85/100 (Grade A)\n• MRUNAL PRAVIN: 76/100 (Grade B+)\n• UKANDE JAYANT: 94/100 (Grade A+)\n\n**Physics:**\n• BOKEY HIMANSHU: 78/100 (Grade B+)\n• MRUNAL PRAVIN: 82/100 (Grade A-)\n• UKANDE JAYANT: 89/100 (Grade A)\n\nData updates automatically from Google Sheets.",
+  syllabus: "I found the course syllabus document for Computer Science CO-3-K. It was last updated 2 hours ago and contains the complete curriculum for Academic Year 2025-26. Would you like me to open it for you?",
+  sheets: "The website is connected to Google Sheets with real-time data synchronization. Student marks, attendance, and information are automatically updated every 30 seconds from your spreadsheet. The last sync was successful.",
+  default: "I can help you with information about Government Polytechnic Arvi (CO-3-K):\n• 📊 Student marks and grades (Real-time from Google Sheets)\n• 📅 Attendance records\n• 📁 Course documents and syllabus\n• 📈 Performance analytics\n• 🔄 Google Sheets integration status\n\nWhat would you like to know?"
 };
 
 const getResponse = (message: string): string => {
@@ -26,6 +27,7 @@ const getResponse = (message: string): string => {
   if (lowerMessage.includes("attendance")) return mockResponses.attendance;
   if (lowerMessage.includes("marks") || lowerMessage.includes("grade")) return mockResponses.marks;
   if (lowerMessage.includes("syllabus") || lowerMessage.includes("pdf")) return mockResponses.syllabus;
+  if (lowerMessage.includes("sheet") || lowerMessage.includes("sync") || lowerMessage.includes("connection")) return mockResponses.sheets;
   
   return mockResponses.default;
 };
