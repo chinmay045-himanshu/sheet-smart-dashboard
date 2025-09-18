@@ -8,6 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { Upload, FileText, Presentation, BookOpen, Shield, Database } from "lucide-react";
 
+// Force refresh to clear PresentationChart cache issue
+
 const ManagementTools = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [presentationTitle, setPresentationTitle] = useState("");
