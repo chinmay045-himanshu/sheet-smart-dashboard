@@ -3,6 +3,7 @@ import StatsCard from "@/components/ui/stats-card";
 import MarksTable from "@/components/dashboard/MarksTable";
 import DocumentLinks from "@/components/dashboard/DocumentLinks";
 import ChatInterface from "@/components/chatbot/ChatInterface";
+import ManagementTools from "@/components/dashboard/ManagementTools";
 import { useGoogleSheets } from "@/hooks/useGoogleSheets";
 import { GraduationCap, Users, TrendingUp, Calendar } from "lucide-react";
 
@@ -76,6 +77,11 @@ const Index = () => {
             <div className="space-y-8">
               <DocumentLinks />
             </div>
+          </div>
+
+          {/* Sir Management Tools */}
+          <div className="mb-8">
+            <ManagementTools />
           </div>
 
           {/* Chatbot Interface */}
