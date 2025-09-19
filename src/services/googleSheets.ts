@@ -21,8 +21,9 @@ class GoogleSheetsService {
   private spreadsheetId: string;
   
   constructor() {
-    // For now, we'll use environment variable or prompt user to add API key
-    this.apiKey = import.meta.env.VITE_GOOGLE_SHEETS_API_KEY || '';
+    // Get API key from localStorage or environment
+    this.apiKey = localStorage.getItem('googleSheetsApiKey') || import.meta.env.VITE_GOOGLE_SHEETS_API_KEY || '';
+    // Connected Google Sheets URL: https://docs.google.com/spreadsheets/d/1uvHqP0dFe9TsXyJPflYHFaUrcSXKxLH1aH-nJyNiO-E/edit?usp=drivesdk
     this.spreadsheetId = '1uvHqP0dFe9TsXyJPflYHFaUrcSXKxLH1aH-nJyNiO-E';
   }
 
