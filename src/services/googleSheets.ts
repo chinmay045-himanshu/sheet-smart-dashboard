@@ -66,7 +66,7 @@ class GoogleSheetsService {
   }
 
   private generateSampleMarks() {
-    const subjects = ['Mathematics', 'Physics', 'Chemistry', 'English', 'Computer Science'];
+    const subjects = ['Computer Graphics', 'Data Structure Using C', 'Object Oriented Programming', 'DBMS Data Base Management System'];
     const marks: { [key: string]: any } = {};
     
     subjects.forEach(subject => {
