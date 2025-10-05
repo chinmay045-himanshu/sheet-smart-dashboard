@@ -23,8 +23,8 @@ class GoogleSheetsService {
   constructor() {
     // Get API key from localStorage or environment
     this.apiKey = localStorage.getItem('googleSheetsApiKey') || import.meta.env.VITE_GOOGLE_SHEETS_API_KEY || '';
-    // Connected Google Sheets URL: https://docs.google.com/spreadsheets/d/1uvHqP0dFe9TsXyJPflYHFaUrcSXKxLH1aH-nJyNiO-E/edit?usp=drivesdk
-    this.spreadsheetId = '1uvHqP0dFe9TsXyJPflYHFaUrcSXKxLH1aH-nJyNiO-E';
+    // Connected Google Sheets URL: https://docs.google.com/spreadsheets/d/1aDrDoNYtc3zgiT50a6902SgYVU1upaUVHuX9Aha64rg/edit?gid=0#gid=0
+    this.spreadsheetId = '1aDrDoNYtc3zgiT50a6902SgYVU1upaUVHuX9Aha64rg';
   }
 
   async fetchStudentData(): Promise<StudentData[]> {
