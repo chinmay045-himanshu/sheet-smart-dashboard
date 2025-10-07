@@ -23,7 +23,68 @@ const students = [
   { id: "24310250207", name: "CHOPADE PIYUSH GHANSHYAM" },
   { id: "24310250208", name: "DESHMUKH SAURABH AVINASH" },
   { id: "24310250209", name: "BAKALE AYUSH PRAKASH" },
-  { id: "24310250210", name: "BHANDWALKAR SACHIN YUDHISHTIR" }
+  { id: "24310250210", name: "BHANDWALKAR SACHIN YUDHISHTIR" },
+  { id: "24310250211", name: "THAKARE SANCHITA SANJAY" },
+  { id: "24310250212", name: "MISHRA ANURAG VIJAYPRAKASH" },
+  { id: "24310250213", name: "KAMATKAR NANDINI YOGESH" },
+  { id: "24310250214", name: "VARMA LAKSH SANTOSH" },
+  { id: "24310250215", name: "PENSHANWAR JANHAVI PRASHANT" },
+  { id: "24310250216", name: "DAHIWADE SHREYA GOPAL" },
+  { id: "24310250217", name: "DEWASE JAYASHRI TEJRAO" },
+  { id: "24310250218", name: "BUTTE MUKTA VISHWAS" },
+  { id: "24310250219", name: "PANGARE ROHINI SANTOSH" },
+  { id: "24310250220", name: "AMBADARE PREMILA DIVAKAR" },
+  { id: "24310250222", name: "SHAIKH RIZA ANSAR" },
+  { id: "24310250223", name: "CHAVHAN SHRIHARI PRADYUMNA" },
+  { id: "24310250224", name: "SIRSAT SEJAL PRAFUL" },
+  { id: "24310250225", name: "BOKEY HIMANSHU SURENDRA" },
+  { id: "24310250226", name: "MOTGHARE PIYUSH SUDHAKAR" },
+  { id: "24310250227", name: "DHOMANE NOMESH VISHWESHWAR" },
+  { id: "24310250228", name: "DOBALE MANAS PADMAKAR" },
+  { id: "24310250229", name: "CHAVHAN CHETANA ONKAR" },
+  { id: "24310250230", name: "JOMDE SHRAVANI RAVSAHEB" },
+  { id: "24310250231", name: "GHAGARE CHETAN ATUL" },
+  { id: "24310250232", name: "PATIL SHRAVANI LUMAKAR" },
+  { id: "24310250233", name: "MISHRA NIDHI VISHUPRASHAD" },
+  { id: "24310250234", name: "HINGWE SHWETA AJAB" },
+  { id: "24310250236", name: "BAKALE SANIKA PRADIP" },
+  { id: "24310250237", name: "CHANPURE PRAFUL DIPAKRAO" },
+  { id: "24310250238", name: "TUMSARE SALONI HEMRAJ" },
+  { id: "24310250239", name: "PATIL SAUMYA PRAVIN" },
+  { id: "24310250240", name: "NERKAR PRERNA SAMIR" },
+  { id: "24310250241", name: "WANKHADE HIMANSHU AVINASH" },
+  { id: "24310250243", name: "MAHORE ARYAN MOHAN" },
+  { id: "24310250244", name: "DEVGHARE SWARUPA RAM" },
+  { id: "24310250245", name: "DONGRE NAMAN SUNIL" },
+  { id: "24310250246", name: "KADAM OMKAR GOVINDRAO" },
+  { id: "24310250247", name: "PIMPLE TUSHAR TUKARAM" },
+  { id: "24310250248", name: "BODHALE MANTHAN MAHADEV" },
+  { id: "24310250249", name: "SHIRPURKAR VEDASHREE PRASHANT" },
+  { id: "24310250250", name: "KALPANDE TANAYA DILIP" },
+  { id: "24310250251", name: "NIGHOT SHRAVANI NANDKISHOR" },
+  { id: "24310250252", name: "AJMIRE SIMRAN HEMANT" },
+  { id: "24310250253", name: "KALE RUSHALI SANDIP" },
+  { id: "24310250254", name: "DHAWALE VAISHANAVI BALAJI" },
+  { id: "24310250255", name: "KATAKPURE NISHA RAJENDRA" },
+  { id: "24310250256", name: "KSHIRSAGAR PAYAL DIPAK" },
+  { id: "24310250257", name: "JASUTKAR TEJASWINI MOHAN" },
+  { id: "24310250258", name: "JUMORE KRISH SUMEDH" },
+  { id: "24310250259", name: "ZADE SANSKRUTI SANJAY" },
+  { id: "24310250260", name: "BARDE ARYA PRAKASH" },
+  { id: "24310250261", name: "MOKASHI CHERITA ARVIND" },
+  { id: "24310250262", name: "KANGALE UMA PANDHARI" },
+  { id: "24310250263", name: "MANOHARE SHRUTI UMESH" },
+  { id: "24310250264", name: "KHAIRE AKANKSHA PRAMOD" },
+  { id: "24310250265", name: "KUYATE ANIKET GANGADHAR" },
+  { id: "24310250271", name: "KHALOKARTANVI MOHAN" },
+  { id: "24310250427", name: "LONKAR SAKSHI KAMLAKAR" },
+  { id: "65", name: "ADHAU ANIKET NIRANJAN" },
+  { id: "66", name: "ECHORE SIDDHESH MANOJ" },
+  { id: "67", name: "SAWNERKAR DNYANESHWAR AJAY" },
+  { id: "68", name: "SHIVAM BHANGE" },
+  { id: "69", name: "NAGPURE PRANJALI SHALIKRAO" },
+  { id: "70", name: "NEVHAL VAIBHAV BHARAT" },
+  { id: "71", name: "BORULE GAURI VISHAL" }
 ];
 
 export const AttendanceTab = () => {
@@ -179,35 +240,56 @@ export const AttendanceTab = () => {
       {/* Student List for Attendance */}
       <Card className="border-primary/20 lg:col-span-2">
         <CardHeader>
-          <CardTitle>Student List - CO-3-K Branch</CardTitle>
-          <CardDescription>Click buttons to mark attendance for each student</CardDescription>
+          <CardTitle>Student List - CO-3-K Branch ({students.length} Students)</CardTitle>
+          <CardDescription>
+            {selectedSubject && selectedPeriod 
+              ? `Marking attendance for ${selectedSubject} - ${selectedPeriod}`
+              : "Select subject and period above, then mark attendance"}
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {students.map((student) => (
-              <div key={student.id} className="flex items-center justify-between p-3 border rounded-lg">
-                <div>
-                  <div className="font-medium text-sm">{student.name}</div>
-                  <div className="text-xs text-muted-foreground">{student.id}</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[600px] overflow-y-auto">
+            {students.map((student) => {
+              const isPresent = attendance[student.id] === true;
+              const isAbsent = attendance[student.id] === false;
+              const isUnmarked = attendance[student.id] === undefined;
+              
+              return (
+                <div 
+                  key={student.id} 
+                  className={`flex items-center justify-between p-3 border rounded-lg transition-colors ${
+                    isPresent ? 'bg-green-50 dark:bg-green-950/20 border-green-500' : 
+                    isAbsent ? 'bg-red-50 dark:bg-red-950/20 border-red-500' : 
+                    'hover:bg-muted/50'
+                  }`}
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-sm truncate">{student.name}</div>
+                    <div className="text-xs text-muted-foreground">{student.id}</div>
+                  </div>
+                  <div className="flex gap-2 ml-2">
+                    <Button
+                      size="sm"
+                      variant={isPresent ? "default" : "outline"}
+                      onClick={() => handleAttendanceChange(student.id, true)}
+                      className="h-8 w-8 p-0"
+                      title="Mark Present"
+                    >
+                      <Check className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant={isAbsent ? "destructive" : "outline"}
+                      onClick={() => handleAttendanceChange(student.id, false)}
+                      className="h-8 w-8 p-0"
+                      title="Mark Absent"
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    variant={attendance[student.id] === true ? "default" : "outline"}
-                    onClick={() => handleAttendanceChange(student.id, true)}
-                  >
-                    <Check className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant={attendance[student.id] === false ? "destructive" : "outline"}
-                    onClick={() => handleAttendanceChange(student.id, false)}
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </CardContent>
       </Card>

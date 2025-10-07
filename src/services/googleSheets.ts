@@ -41,19 +41,27 @@ class GoogleSheetsService {
       const studentsResponse = await fetch(studentsUrl);
       const studentsData = await studentsResponse.json();
 
-      if (!studentsData.values) {
-        throw new Error('No student data found');
+      if (!studentsData.values || studentsData.values.length === 0) {
+        console.warn('No data in sheet, using mock data');
+        return this.getMockData();
       }
 
-      // Skip header row and process student data
-      const students = studentsData.values.slice(1).filter((row: any[]) => row[1] && row[2]);
+      // Filter out empty rows and rows without proper data
+      const validRows = studentsData.values.filter((row: any[]) => {
+        // Check if row has data in at least column B (enrollment) or C (name)
+        return row && row.length > 0 && (row[1]?.trim() || row[2]?.trim());
+      });
+
+      if (validRows.length === 0) {
+        console.warn('No valid student data found in sheet, using mock data');
+        return this.getMockData();
+      }
       
-      // For now, we'll generate sample marks data
-      // In a real implementation, you'd fetch marks from additional sheets or columns
-      const studentsWithMarks: StudentData[] = students.map((row: any[], index: number) => ({
+      // Process student data
+      const studentsWithMarks: StudentData[] = validRows.map((row: any[], index: number) => ({
         id: (index + 1).toString(),
-        enrollmentNo: row[1] || '',
-        name: row[2] || '',
+        enrollmentNo: row[1]?.trim() || '',
+        name: row[2]?.trim() || row[0]?.trim() || `Student ${index + 1}`,
         subjects: this.generateSampleMarks(),
         attendance: Math.floor(Math.random() * 20) + 80 // Random attendance 80-100%
       }));
