@@ -248,43 +248,47 @@ export const AttendanceTab = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[600px] overflow-y-auto">
-            {students.map((student) => {
+          <div className="space-y-2 max-h-[600px] overflow-y-auto pr-2">
+            {students.map((student, index) => {
               const isPresent = attendance[student.id] === true;
               const isAbsent = attendance[student.id] === false;
-              const isUnmarked = attendance[student.id] === undefined;
               
               return (
                 <div 
                   key={student.id} 
-                  className={`flex items-center justify-between p-3 border rounded-lg transition-colors ${
+                  className={`flex items-center justify-between p-4 border rounded-lg transition-all ${
                     isPresent ? 'bg-green-50 dark:bg-green-950/20 border-green-500' : 
                     isAbsent ? 'bg-red-50 dark:bg-red-950/20 border-red-500' : 
-                    'hover:bg-muted/50'
+                    'hover:bg-muted/50 border-border'
                   }`}
                 >
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium text-sm truncate">{student.name}</div>
-                    <div className="text-xs text-muted-foreground">{student.id}</div>
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="text-sm font-semibold text-muted-foreground w-8">{index + 1}.</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-base">{student.name}</div>
+                      {student.id && <div className="text-sm text-muted-foreground">{student.id}</div>}
+                    </div>
                   </div>
-                  <div className="flex gap-2 ml-2">
+                  <div className="flex gap-2 ml-4">
                     <Button
                       size="sm"
                       variant={isPresent ? "default" : "outline"}
                       onClick={() => handleAttendanceChange(student.id, true)}
-                      className="h-8 w-8 p-0"
+                      className="h-10 w-20"
                       title="Mark Present"
                     >
-                      <Check className="w-4 h-4" />
+                      <Check className="w-4 h-4 mr-1" />
+                      Present
                     </Button>
                     <Button
                       size="sm"
                       variant={isAbsent ? "destructive" : "outline"}
                       onClick={() => handleAttendanceChange(student.id, false)}
-                      className="h-8 w-8 p-0"
+                      className="h-10 w-20"
                       title="Mark Absent"
                     >
-                      <X className="w-4 h-4" />
+                      <X className="w-4 h-4 mr-1" />
+                      Absent
                     </Button>
                   </div>
                 </div>
